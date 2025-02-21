@@ -92,6 +92,6 @@
     },
     "./*": "./*"
   },
-  "version": "6.3.1",
+  "version": "5.22.0",
   "sideEffects": false
 }

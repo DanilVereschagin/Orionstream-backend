@@ -12,6 +12,16 @@ export class AccountService {
 		return users;
 	}
 
+	public async me(id: string) {
+		const user = await this.prismaService.user.findUnique({
+			where: {
+				id,
+			},
+		});
+
+		return user;
+	}
+
 	public async create(input: CreateUserInput) {
 		const { email, password, username } = input;
 

@@ -53,18 +53,16 @@ export function ms(str: StringValue): number {
 	}
 
 	const match =
-		/^(?<value>-?(?:\d+)?\.?d+) *(?<type>milliseconds? |msecs?|ms|seconds?|secs?|s|minutes?|mins?|m|hours?|hrs?|h|days?|d|weeks?|w|years?|yrs?|y)?$/i.exec(
+		/^(?<value>-?(?:\d+)?\.?\d+) *(?<type>milliseconds?|msecs?|ms|seconds?|secs?|s|minutes?|mins?|m|hours?|hrs?|h|days?|d|weeks?|w|years?|yrs?|y)?$/i.exec(
 			str,
 		);
 
 	const groups = match?.groups as
 		| { value: string; type?: string }
 		| undefined;
-
 	if (!groups) {
 		return NaN;
 	}
-
 	const n = parseFloat(groups.value);
 	const type = (groups.type || 'ms').toLowerCase() as Lowercase<Unit>;
 
@@ -108,7 +106,8 @@ export function ms(str: StringValue): number {
 		case 'ms':
 			return n;
 		default:
-			throw new Error(`Ошибка: единица времени ${type} была распознана,
-                 но не существует соответствующего случая. Пожалуйста, проверьте введённые данные.`);
+			throw new Error(
+				`Ошибка: единица времени ${type} была распознана, но не существует соответствующего случая. Пожалуйста, проверьте введенные данные.`,
+			);
 	}
 }
